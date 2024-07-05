@@ -1,5 +1,7 @@
 .qn-wrap{
     height: calc(100vh - 70px) !important; display:flex;
+    padding:10px;
+    /* margin-top:10px; */
 }
 .title{
     font-size:40px;
@@ -24,4 +26,10 @@ height:100%;
     color:white;
     font-family: "Kumbh Sans", sans-serif;
     cursor:pointer
+}
+.qn-section1{
+    overflow-y:scroll;
+    border: 1px solid #00000021 ;   /* padding:10px; */
+    margin:10px;
+    border-radius:10px;
 }
