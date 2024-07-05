@@ -4,6 +4,7 @@ import Question from './Question';
 import Test from "./Test"
 import Navbar from './Navbar';
 import { Routes, Route, BrowserRouter } from "react-router-dom"
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 function App() {

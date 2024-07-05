@@ -17,7 +17,7 @@ function Navbar() {
           <Link to="/code">Code</Link>
         </li>
         <Link to="/code">
-            <button className="btn">Get Started</button>
+            <button className="code-btn">Get Started</button>
           </Link>
 
       </ul>

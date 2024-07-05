@@ -5,12 +5,20 @@ import CodeEditor from './CodeEditor';
 import OutputArea from './OutputArea';
 import './App.css';
 import axios from 'axios';
+import Button from 'react-bootstrap/Button';
+import Offcanvas from 'react-bootstrap/Offcanvas';
+// import Code from './Code';
 
 function Question() {
   const [selectedCode, setSelectedCode] = useState("");
   const [description, setDescription] = useState("");
   const [title, setTitle] = useState("");
   const [output, setOutput] = useState("");
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
 
   const handleCodeLoad = (code, title, description) => {
     setSelectedCode(code);
@@ -36,9 +44,23 @@ function Question() {
   }, [output]);
 
   return (
-    <div className="App">
-     <h1>Debugging</h1>
-      <CodeLoader onCodeLoad={handleCodeLoad} />
+    <div >
+        {/* <Code/> */}
+     {/* <h1>Debugging</h1> */}
+
+     <Button variant="primary" onClick={handleShow}>
+        Question List
+      </Button>
+
+      <Offcanvas show={show} onHide={handleClose}>
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>Offcanvas</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+        <CodeLoader onCodeLoad={handleCodeLoad} />     
+           </Offcanvas.Body>
+      </Offcanvas>
+      {/* <CodeLoader onCodeLoad={handleCodeLoad} /> */}
       <div className="title">{title}</div>
       <div className="description">{description}</div>
       <div className="patition">
