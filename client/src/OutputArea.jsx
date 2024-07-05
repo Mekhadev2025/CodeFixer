@@ -1,5 +1,5 @@
 import React,{useEffect} from 'react';
-
+import "./styles/Output.css"
 function OutputArea({ output }) {
   useEffect(() => {
     console.log("OutputArea received output:", output);
@@ -8,7 +8,7 @@ function OutputArea({ output }) {
   return (
     <div className="opContainer">
       <div className="opArea">
-        <h2>Your Output:</h2>
+       
         <pre className="area">{output}</pre>
       </div>
     </div>

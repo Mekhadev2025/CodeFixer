@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@100..900&display=swap');
+.editor{
+
+    /* background: red; */
+    border: none;
+    padding: 0;
+    margin: 0;
+    outline: none;
+    box-shadow: none;
+    resize: none; 
+    /* border:1px solid gray; */
+    /* background:red; */
+    color:black;
+    height:90%;
+    overflow:scroll;
+    padding:10px;
+    font-family: "Noto Sans Mono", monospace;
+    font-weight: normal;
+    font-size: 13px;
+    font-feature-settings: "liga" 0, "calt" 0;
+    line-height: 18px;
+    letter-spacing: 0px;
+    width:100%;
+    margin-bottom:5px
+    /* margin:20px */
+    /* border-radius:10px; */
+}
+.edit{
+    height:60%;
+
+}
+.editor-wrap{
+    height:100%;
+    border :1px solid  #00000021;
+    border-radius:10px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between
+}
+.run-btn,.submit-btn{
+    padding:5px 20px ;
+    background:var(--blue);
+    border:none;
+    border-radius:5px;
+    color:white;
+    font-family: "Kumbh Sans", sans-serif;
+    cursor:pointer;
+    font-size:13px;
+}
+.btn-group{
+    display:flex;
+    align-items:center;
+    justify-content:right;
+    gap:10px;
+    width:100%;
+    padding-right:50px;
+    margin:2px;
+    /* margin-top:10px; */
+}
+
+.lang-dropdown{
+    cursor:pointer;
+    border-radius:5px;
+ 
+}
+.dropdown{
+    cursor:pointer;
+    height:40px;
+    width:100px;
+    border:none;
+    border-radius:5px;
+    font-family: "Noto Sans Mono", monospace;
+    font-size:12px;
+}
+.dropdown::focus{
+    border:none;
+}
+.code-bar{
+    height:40px;
+    /* background:green; */
+    border-radius:5px;
+    display:flex;
+    align-items:center;
+    border-bottom:1px solid  #00000021;
+}

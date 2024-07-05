@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
+import "./styles/CodeEditor.css";
 
 function CodeEditor({ code, onRunCode }) {
   const [currentCode, setCurrentCode] = useState(code);
@@ -14,16 +15,34 @@ function CodeEditor({ code, onRunCode }) {
 
   return (
     <div className="edit">
-      <textarea
-        name="code"
-        className="editor"
-        rows="10"
-        cols="50"
-        value={currentCode}
-        onChange={(e) => setCurrentCode(e.target.value)}
-      ></textarea>
-      <button onClick={handleSubmit}>Run Code</button>
-    </div>
+      <div className="editor-wrap">
+        <div className="code-bar">
+          <div className="lang-dropdown">
+            <select name="language" id="language" className="dropdown">
+              <option value="python">Python</option>
+              <option value="java">Java</option>
+              <option value="c">C</option>
+              <option value="cpp">C++</option>
+            </select>
+          </div>
+          <div className="btn-group">
+          <button className="run-btn" onClick={handleSubmit}>
+            Run
+          </button>
+          <button className="submit-btn">Submit Code</button>
+        </div>
+        </div>
+        <textarea
+          name="code"
+          className="editor"
+          rows="10"
+          cols="50"
+          value={currentCode}
+          onChange={(e) => setCurrentCode(e.target.value)}
+        ></textarea>
+      </div>
+    
+      </div>
   );
 }
 

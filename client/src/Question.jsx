@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import Navbar from './Navbar';
-import CodeLoader from './CodeLoader';
-import CodeEditor from './CodeEditor';
-import OutputArea from './OutputArea';
-import './App.css';
-import axios from 'axios';
-import Button from 'react-bootstrap/Button';
-import Offcanvas from 'react-bootstrap/Offcanvas';
+import React, { useState, useEffect } from "react";
+import Navbar from "./Navbar";
+import CodeLoader from "./CodeLoader";
+import CodeEditor from "./CodeEditor";
+import OutputArea from "./OutputArea";
+import "./styles/Question.css";
+import axios from "axios";
+import Button from "react-bootstrap/Button";
+import Offcanvas from "react-bootstrap/Offcanvas";
 // import Code from './Code';
 
 function Question() {
@@ -19,7 +19,6 @@ function Question() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-
   const handleCodeLoad = (code, title, description) => {
     setSelectedCode(code);
     setTitle(title);
@@ -30,7 +29,9 @@ function Question() {
   const handleCodeRun = async (code) => {
     try {
       console.log("Trying to send data...");
-      const response = await axios.post('http://localhost:3000/run-code', { code });
+      const response = await axios.post("http://localhost:3000/run-code", {
+        code,
+      });
       console.log("Response received:", response.data);
       setOutput(response.data.output);
     } catch (error) {
@@ -44,29 +45,42 @@ function Question() {
   }, [output]);
 
   return (
-    <div >
-        {/* <Code/> */}
-     {/* <h1>Debugging</h1> */}
-
-     <Button variant="primary" onClick={handleShow}>
+    <div className='qn-wrap'
+    >
+        <div className="qn-section1">
+                  <div className="title-wrap">
+        <div className="title">{title}</div>
+        <button className="qn-btn" onClick={handleShow}>
         Question List
-      </Button>
+      </button>
 
       <Offcanvas show={show} onHide={handleClose}>
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Offcanvas</Offcanvas.Title>
+          <Offcanvas.Title>Question List</Offcanvas.Title>
         </Offcanvas.Header>
-        <Offcanvas.Body>
-        <CodeLoader onCodeLoad={handleCodeLoad} />     
-           </Offcanvas.Body>
+
+        <Offcanvas.Body style={{ padding: 0 }}>
+          <div
+            className="offcanvas-wrap"
+            style={{ width: "100%", height: "100%" }}
+          >
+            <CodeLoader onCodeLoad={handleCodeLoad} />
+          </div>
+        </Offcanvas.Body>
       </Offcanvas>
-      {/* <CodeLoader onCodeLoad={handleCodeLoad} /> */}
-      <div className="title">{title}</div>
+      </div>
+      
+
       <div className="description">{description}</div>
-      <div className="patition">
+        </div>
+
+      <div className="qn-section2">
         <CodeEditor code={selectedCode} onRunCode={handleCodeRun} />
         <OutputArea output={output} />
       </div>
+      
+
+
     </div>
   );
 }

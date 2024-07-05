@@ -1,0 +1,22 @@
+
+.btn-grp{
+    display:flex;
+    flex-direction:column;
+    /* gap:10px; */
+background:red  ;
+width:100%;
+
+}
+
+.codeloader-btn{
+    background:white;
+    border:none;
+    padding:10px;
+    text-align:left;
+    border:1px solid gray;
+}
+.codeloader-btn:hover{
+    background:gray;
+    color:white;
+    cursor:pointer;
+}

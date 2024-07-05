@@ -1,0 +1,27 @@
+.qn-wrap{
+    height: calc(100vh - 70px) !important; display:flex;
+}
+.title{
+    font-size:40px;
+    font-weight:900px
+}
+.title-wrap{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.qn-section1,.qn-section2{
+width:100%;
+padding:20px;
+height:100%;
+}
+.qn-btn{
+    padding:10px 20px;
+    background:var(--yellow);
+    border:none;
+    border-radius:10px;
+    color:white;
+    font-family: "Kumbh Sans", sans-serif;
+    cursor:pointer
+}

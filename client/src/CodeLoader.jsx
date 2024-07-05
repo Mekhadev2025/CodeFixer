@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import "./styles/CodeLoader.css"
 function CodeLoader({ onCodeLoad }) {
   const loadCode = async (url, titleText, descriptionHTML) => {
     try {
@@ -12,10 +13,10 @@ function CodeLoader({ onCodeLoad }) {
 
   return (
     <div className="btn-grp">
-      <button onClick={() => loadCode('../static/twosum.py', 'TWO SUM', 'Your description here')}>Two Sum</button>
-      <button onClick={() => loadCode('../static/container.py', 'Container with Most Water', 'Your description here')}>Container with Most Water</button>
-      <button onClick={() => loadCode('../static/fibonacci.py', 'Fibonacci', 'Your description here')}>Fibonacci</button>
-      <button onClick={() => loadCode('../static/reverse.py', 'Reverse a String', 'Your description here')}>Reverse a String</button>
+      <button className='codeloader-btn' onClick={() => loadCode('../static/twosum.py', 'TWO SUM', 'Your description here')}>Two Sum</button>
+      <button  className='codeloader-btn' onClick={() => loadCode('../static/container.py', 'Container with Most Water', 'Your description here')}>Container with Most Water</button>
+      <button  className='codeloader-btn' onClick={() => loadCode('../static/fibonacci.py', 'Fibonacci', 'Your description here')}>Fibonacci</button>
+      <button  className='codeloader-btn' onClick={() => loadCode('../static/reverse.py', 'Reverse a String', 'Your description here')}>Reverse a String</button>
     </div>
   );
 }
