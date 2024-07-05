@@ -1,9 +1,10 @@
-def generate_fibonacci(n):
-    fibonacci_seq = [1, 1]
-    for i in range(2, n):
-        next_fib = fibonacci_seq[i - 1] + fibonacci_seq[i - 2]
-        fibonacci_seq.append(next_fib)
-    return fibonacci_seq
-
-n = 15
-print(generate_fibonacci(n))
+def two_sum(nums, target):
+    num_dict = {}
+    for i, num in enumerate(nums):
+        complement = target - num
+        if complement in num_dict:
+            return [num_dict[complement], i]
+        num_dict[num] = i
+num_dict = [1, 2, 3, 4, 5]  
+target = 7
+print(two_sum(num_dict, target))

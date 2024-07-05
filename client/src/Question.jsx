@@ -37,12 +37,11 @@ function Question() {
 
   return (
     <div className="App">
-      <Navbar />
-      <h1>Debugging</h1>
+     <h1>Debugging</h1>
       <CodeLoader onCodeLoad={handleCodeLoad} />
       <div className="title">{title}</div>
       <div className="description">{description}</div>
-      <div className="partition">
+      <div className="patition">
         <CodeEditor code={selectedCode} onRunCode={handleCodeRun} />
         <OutputArea output={output} />
       </div>
