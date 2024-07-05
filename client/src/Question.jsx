@@ -7,9 +7,17 @@ import "./styles/Question.css";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
-// import Code from './Code';
+import Airtable from 'airtable';
+
+
 
 function Question() {
+    const airtableApiKey = "patYSF5UnpkwAeWpK.e196c2788dd2e5d327ea4e9d52d5624147fed9e1a9abcbec3855206915c77f5b";
+const airtableBaseId = "app8ei1ffPYtMRh1M";
+console.log('Airtable API Key:', airtableApiKey);
+console.log('Airtable Base ID:', airtableBaseId);
+
+const base = new Airtable({ apiKey: airtableApiKey }).base(airtableBaseId);
   const [selectedCode, setSelectedCode] = useState("");
   const [description, setDescription] = useState("");
   const [title, setTitle] = useState("");
@@ -26,61 +34,64 @@ function Question() {
     setOutput("");
   };
 
+  const [questions, setQuestions] = useState([]);
+
+  useEffect(() => {
+    base('Questions')
+      .select({ view: 'Grid view' })
+      .eachPage((records, fetchNextPage) => {
+        setQuestions(records);
+        fetchNextPage();
+      }, (err) => {
+        if (err) { console.error(err); return; }
+      });
+  }, []);
+
   const handleCodeRun = async (code) => {
     try {
-      console.log("Trying to send data...");
-      const response = await axios.post("http://localhost:3000/run-code", {
-        code,
-      });
-      console.log("Response received:", response.data);
+      const response = await axios.post("http://localhost:3000/run-code", { code });
       setOutput(response.data.output);
     } catch (error) {
       setOutput("Error: " + error.message);
     }
   };
 
-  // Log the output state whenever it changes
   useEffect(() => {
     console.log("Output state updated:", output);
   }, [output]);
 
   return (
-    <div className='qn-wrap'
-    >
-        <div className="qn-section1">
-                  <div className="title-wrap">
-        <div className="title">{title}</div>
-        <button className="qn-btn" onClick={handleShow}>
-        Question List
-      </button>
+    <div className="qn-wrap">
+      <div className="qn-section1">
+        <div className="title-wrap">
+          <div className="title">{title}</div>
+          <button className="qn-btn" onClick={handleShow}>
+            Question List
+          </button>
 
-      <Offcanvas show={show} onHide={handleClose}>
-        <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Question List</Offcanvas.Title>
-        </Offcanvas.Header>
+          <Offcanvas show={show} onHide={handleClose}>
+            <Offcanvas.Header closeButton>
+              <Offcanvas.Title>Question List</Offcanvas.Title>
+            </Offcanvas.Header>
 
-        <Offcanvas.Body style={{ padding: 0 }}>
-          <div
-            className="offcanvas-wrap"
-            style={{ width: "100%", height: "100%" }}
-          >
-            <CodeLoader onCodeLoad={handleCodeLoad} />
-          </div>
-        </Offcanvas.Body>
-      </Offcanvas>
-      </div>
-      
-
-      <div className="description">{description}</div>
+            <Offcanvas.Body style={{ padding: 0 }}>
+              <div
+                className="offcanvas-wrap"
+                style={{ width: "100%", height: "100%" }}
+              >
+                <CodeLoader onCodeLoad={handleCodeLoad} questions={questions} />
+              </div>
+            </Offcanvas.Body>
+          </Offcanvas>
         </div>
+
+        <div className="description" dangerouslySetInnerHTML={{ __html: description }} />
+      </div>
 
       <div className="qn-section2">
         <CodeEditor code={selectedCode} onRunCode={handleCodeRun} />
         <OutputArea output={output} />
       </div>
-      
-
-
     </div>
   );
 }

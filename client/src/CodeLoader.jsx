@@ -1,11 +1,12 @@
 import React from 'react';
 import axios from 'axios';
 import "./styles/CodeLoader.css"
-function CodeLoader({ onCodeLoad }) {
+
+function CodeLoader({ onCodeLoad, questions }) {
   const loadCode = async (url, titleText, descriptionHTML) => {
     try {
-      const response = await axios.get(url);
-      onCodeLoad(response.data, titleText, descriptionHTML);
+      const response = url;
+      onCodeLoad(response, titleText, descriptionHTML);
     } catch (error) {
       console.error("Error loading data:", error);
     }
@@ -13,12 +14,38 @@ function CodeLoader({ onCodeLoad }) {
 
   return (
     <div className="btn-grp">
-      <button className='codeloader-btn' onClick={() => loadCode('../static/twosum.py', 'TWO SUM', 'Your description here')}>Two Sum</button>
-      <button  className='codeloader-btn' onClick={() => loadCode('../static/container.py', 'Container with Most Water', 'Your description here')}>Container with Most Water</button>
-      <button  className='codeloader-btn' onClick={() => loadCode('../static/fibonacci.py', 'Fibonacci', 'Your description here')}>Fibonacci</button>
-      <button  className='codeloader-btn' onClick={() => loadCode('../static/reverse.py', 'Reverse a String', 'Your description here')}>Reverse a String</button>
+      {questions.map(question => (
+        <button
+          key={question.id}
+          className='codeloader-btn'
+          onClick={() => loadCode(
+            question.fields.CodeURL,  // Ensure URL is passed correctly
+            question.fields.Title,
+            generateDescription(
+              question.fields.GeneralDescription,
+              question.fields.Examples,
+              question.fields.Constraint
+            )
+          )}
+        >
+          {question.fields.Title}
+        </button>
+      ))}
     </div>
   );
 }
+
+const generateDescription = (generalDescription, examples, constraints) => {
+  const constraintsList = constraints.split('\n').filter(Boolean).map(constraint => `<li>${constraint}</li>`).join('');
+  
+  return `
+    <h2>General Description</h2>
+    <p>${generalDescription}</p>
+    <h2>Examples</h2>
+    <pre><code>${examples}</code></pre>
+    <h2>Constraints</h2>
+    <ul>${constraintsList}</ul>
+  `;
+};
 
 export default CodeLoader;
