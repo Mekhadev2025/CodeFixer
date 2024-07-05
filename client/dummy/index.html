@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Python Code Runner</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0px;
+      padding: 0px;
+      color: white;
+      background: #041424;
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <img src="./foss-logo.png" alt="" />
+    <button>
+      <a class="link" href="https://fossmec.netlify.app/">Contact Us</a>
+    </button>
+  </div>
+
+  <h1>Debugging</h1>
+  <div class="btn-grp">
+    <button id="twosum">Two Sum</button>
+    <button id="container">Container with Most Water</button>
+    <button id="fibonacci">Fibonacci</button>
+    <button id="reverse">Reverse a String</button>
+  </div>
+
+  <div class="title" name="qn" id="title-id"></div>
+  <div class="description" id="description-div"></div>
+
+  <div class="partition">
+    <div class="edit">
+      <textarea name="code" class="editor" rows="10" cols="50" id="codeInput"></textarea>
+      <button id="submitBtn">Run Code</button>
+    </div>
+
+    <div class="opContainer">
+      <div class="opArea">
+        <h2>Your Output:</h2>
+        <pre class="area"></pre>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="./script.js"></script>
+</body>
+</html>
